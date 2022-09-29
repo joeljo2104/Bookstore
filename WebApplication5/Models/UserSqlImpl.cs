@@ -21,7 +21,7 @@ namespace WebApplication5.Models
 
         public User AddUser(User user)
         {
-            comm.CommandText = "insert into User (UserName, Password, Name, ShippingAddress) values ('" + user.UserName + "', '" + user.Password + "', '" + user.Name + "', '" + user.ShippingAddress + "')";
+            comm.CommandText = "insert into Users (UserName, Password, Name, ShippingAddress) values ('" + user.UserName + "', '" + user.Password + "', '" + user.Name + "', '" + user.ShippingAddress + "')";
             comm.Connection = conn;
             conn.Open();
             int row = comm.ExecuteNonQuery();
@@ -38,7 +38,7 @@ namespace WebApplication5.Models
 
         public void DeleteUser(int id)
         {
-            comm.CommandText = "delete from user where UserId = " + id;
+            comm.CommandText = "delete from Users where UserId = " + id;
             comm.Connection = conn;
             conn.Open();
             conn.Close();
@@ -47,7 +47,7 @@ namespace WebApplication5.Models
         public List<User> GetAllUser()
         {
             List<User> list = new List<User>();
-            comm.CommandText = "select * from User";
+            comm.CommandText = "select * from Users";
             comm.Connection = conn;
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
@@ -66,7 +66,7 @@ namespace WebApplication5.Models
 
         public User GetUserById(int id)
         {
-            comm.CommandText = "select * from User where UserId" + id;
+            comm.CommandText = "select * from Users where UserId" + id;
             comm.Connection = conn;
             conn.Open();
             SqlDataReader reader = comm.ExecuteReader();
@@ -86,7 +86,7 @@ namespace WebApplication5.Models
 
         public void UpdateUser(User user)
         {
-            comm.CommandText = "update User set UserName=" + user.UserName + "', 'Name=" + user.Name + "', 'ShippingAddress=" + user.ShippingAddress + "' where UserId =  '" + user.UserId;
+            comm.CommandText = "update Users set UserName=" + user.UserName + "', 'Name=" + user.Name + "', 'ShippingAddress=" + user.ShippingAddress + "' where UserId =  '" + user.UserId;
             comm.Connection = conn;
             conn.Open();
             conn.Close();

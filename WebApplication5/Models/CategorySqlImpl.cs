@@ -82,7 +82,7 @@ namespace WebApplication5.Models
                 string Position = reader["Position"].ToString();
                 string CreatedAt = reader["CreatedAt"].ToString();
 
-                Category category = new Category(CategoryId, CategoryName, Description, Image, Status, Position, CreatedAt));
+                Category category = new Category(CategoryId, CategoryName, Description, Image, Status, Position, CreatedAt);
 
                 conn.Close();
                 return category;
