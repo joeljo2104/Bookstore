@@ -25,6 +25,7 @@ namespace WebApplication5.Models
             comm.Connection = conn;
             conn.Open();
             int row = comm.ExecuteNonQuery();
+            conn.Close();
             if (row > 0)
             {
                 return book;
@@ -32,12 +33,14 @@ namespace WebApplication5.Models
             {
                 return null;
             }
-            conn.Close();
         }
 
         public void DeleteBook(int id)
         {
-            throw new NotImplementedException();
+            comm.CommandText = "delete from Book where BookId = " + id;
+            comm.Connection = conn;
+            conn.Open();
+            conn.Close();
         }
 
         public List<Book> GetAllBook()
@@ -86,15 +89,19 @@ namespace WebApplication5.Models
                 string Image = reader["Image"].ToString();
 
                 Book book = new Book(BookId, CategoryId, Title, ISBN, Year, Price, Description, Position, Status, Image);
+                conn.Close(); 
                 return book;
             }
-            conn.Close();
+            
             return null; ;
         }
 
         public void UpdateBook(Book book)
         {
-            throw new NotImplementedException();
+            comm.CommandText = "update Book set CategoryId=" + book.CategoryID + "', 'Title=" + book.Title + "', 'ISBN=" + book.ISBN + "', 'Year=" + book.Year + "', 'Price=" + book.Price + "', 'Description=" + book.Description + "', 'Position=" + book.Position + "', 'Status=" + book.Status + "', 'Image=" + book.Image + "' where BookId=" + book.BookId;
+            comm.Connection = conn;
+            conn.Open();
+            conn.Close();
         }
     }
 }
